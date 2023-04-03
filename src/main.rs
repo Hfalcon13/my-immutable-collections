@@ -1,6 +1,7 @@
 
 mod tree;
 mod traversion_options;
+mod list;
 
 use tree::Tree;
 use traversion_options::TraversionOptions::{Thili,Tohi,Sofi};
