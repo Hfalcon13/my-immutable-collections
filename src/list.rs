@@ -25,6 +25,7 @@ impl<T> Node<T>
         }
     }
 }
+
 impl<T: PartialEq> Node<T>
 {
     pub fn contains(self, val: T) -> bool
