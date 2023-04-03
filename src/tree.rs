@@ -62,18 +62,22 @@ impl<T> Tree<T> where T: Clone
 
 impl<T: Default + Copy> Tree<T>
 {
+    // O(1)
     pub fn new(val: Option<T>) -> Tree<T>
     {
         Tree { left: None, val: val.unwrap_or_default() , rigth: None }
     }
+    // O(1)
     fn _rw_left(self, t: Tree<T>) -> Tree<T>
     {
         Tree { left: Some(Box::new(t.clone())), ..self }
     }
+    // O(1)
     fn _rw_rigth(self, t: Tree<T>) -> Tree<T>
     {
         Tree { rigth: Some(Box::new(t.clone())), ..self }
     }
+    // O(n)
     pub fn to_vec(self, to: Option<TraversionOptions>, acc: Option<Vec<T>>) -> Vec<T>
     {
         let to = to.unwrap_or_default();
@@ -173,6 +177,10 @@ impl<T: Default + Copy + PartialOrd> Tree<T>
                 panic!("unimplemented")
             },
         }
+    }
+    pub fn balance(self) -> Tree<T>
+    {
+        panic!("unimplemented")
     }
 }
 
