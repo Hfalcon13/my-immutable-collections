@@ -134,48 +134,31 @@ impl<T: Default + Copy> Tree<T>
 impl<T: Default + Copy + PartialOrd> Tree<T>
 {
     // O(log(n))
-    pub fn insert(self, to: Option<TraversionOptions>, val: T) -> Tree<T>
+    pub fn insert(self, val: T) -> Tree<T>
     {
-        let to = to.unwrap_or_default();
-        //default params
-
-        match to 
+        if val < self.val
         {
-            TraversionOptions::Thili =>
+            if self.left.is_none()
             {
-                panic!("unimplemented")
-            },
-            TraversionOptions::Tohi =>
+                Tree { left: Some(Box::new(Tree::<T>::new(Some(val)))), ..self}
+            }
+            else
             {
-                if val < self.val
-                {
-                    if self.left.is_none()
-                    {
-                        Tree { left: Some(Box::new(Tree::<T>::new(Some(val)))), ..self}
-                    }
-                    else
-                    {
-                        Tree { left: Some(Box::new((*self.left.unwrap()).insert(Some(to), val))), ..self}
-                        //(*self.left.unwrap()).insert(Some(to), val) //buged
-                    }
-                }
-                else
-                {
-                    if self.rigth.is_none()
-                    {
-                        Tree { rigth: Some(Box::new(Tree::<T>::new(Some(val)))), ..self}
-                    }
-                    else
-                    {
-                        Tree { rigth: Some(Box::new((*self.rigth.unwrap()).insert(Some(to), val))), ..self}
-                        //(*self.rigth.unwrap()).insert(Some(to), val) //buged
-                    }
-                }
-            },
-            TraversionOptions::Sofi =>
+                Tree { left: Some(Box::new((*self.left.unwrap()).insert(val))), ..self}
+                //(*self.left.unwrap()).insert(Some(to), val) //buged
+            }
+        }
+        else
+        {
+            if self.rigth.is_none()
             {
-                panic!("unimplemented")
-            },
+                Tree { rigth: Some(Box::new(Tree::<T>::new(Some(val)))), ..self}
+            }
+            else
+            {
+                Tree { rigth: Some(Box::new((*self.rigth.unwrap()).insert(val))), ..self}
+                //(*self.rigth.unwrap()).insert(Some(to), val) //buged
+            }
         }
     }
     pub fn balance(self) -> Tree<T>
