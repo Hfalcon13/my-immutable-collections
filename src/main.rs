@@ -11,9 +11,17 @@ use tree::Tree;
 
 fn main() {
     let mut t = Tree::<i32>::new(Some(1));
-    t = t.insert(2);
+    for i in 2..=3 {
+        t = t.insert(i);
+    }
     println!("vec: {:?}", t.clone().to_vec(None, None));
     println!("count: {}", t.clone().count());
     println!("h: {}", t.clone().height());
-    println!("eff: {}", t.clone().efficency());
+    //println!("eff: {}", t.clone().efficency());
+    t = t.balance();
+    println!("vec: {:?}", t.clone().to_vec(None, None));
+    println!("count: {}", t.clone().count());
+    println!("h: {}", t.clone().height());
+    //println!("eff: {}", t.clone().efficency());
+    
 }
